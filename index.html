@@ -31,16 +31,69 @@
     }
     
     .card-hover {
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       backdrop-filter: blur(10px);
       background: rgba(255, 255, 255, 0.85) !important;
       border: 1px solid rgba(74, 124, 111, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card-hover::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(74, 124, 111, 0.1), transparent);
+      transition: left 0.5s;
+    }
+    
+    .card-hover:hover::before {
+      left: 100%;
     }
     
     .card-hover:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(74, 124, 111, 0.15);
       background: rgba(255, 255, 255, 0.95) !important;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    @keyframes pulse-glow {
+      0%, 100% { box-shadow: 0 0 20px rgba(74, 124, 111, 0.3); }
+      50% { box-shadow: 0 0 40px rgba(74, 124, 111, 0.6); }
+    }
+    
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+    
+    @keyframes bounce-in {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    .emoji-float {
+      display: inline-block;
+      animation: float 3s ease-in-out infinite;
+    }
+    
+    .emoji-large {
+      font-size: 4rem;
+      display: inline-block;
+      transition: transform 0.3s ease;
+    }
+    
+    .emoji-large:hover {
+      transform: scale(1.2) rotate(10deg);
     }
     
     .timeline-item::before {
@@ -132,16 +185,33 @@
        </div>
       </div>
       <div class="flex-shrink-0">
-       <div class="w-64 h-64 md:w-80 md:h-80 rounded-2xl shadow-2xl flex items-center justify-center text-8xl">
-        👩‍⚕️
+       <div class="w-64 h-64 md:w-80 md:h-80 rounded-2xl shadow-2xl flex items-center justify-center text-8xl relative overflow-hidden" style="background: linear-gradient(135deg, rgba(74, 124, 111, 0.1) 0%, rgba(107, 150, 136, 0.1) 100%); animation: pulse-glow 3s ease-in-out infinite;">
+        <div style="animation: float 4s ease-in-out infinite;">
+         👩‍⚕️
+        </div>
+        <div style="position: absolute; top: 10%; right: 10%; font-size: 2rem; animation: bounce-in 1s ease-out, float 3s ease-in-out infinite 1s;">
+         ✨
+        </div>
+        <div style="position: absolute; bottom: 15%; left: 10%; font-size: 1.5rem; animation: bounce-in 1.2s ease-out, float 3.5s ease-in-out infinite 1.2s;">
+         🌿
+        </div>
+        <div style="position: absolute; top: 20%; left: 15%; font-size: 1.8rem; animation: bounce-in 1.4s ease-out, float 4s ease-in-out infinite 1.4s;">
+         💚
+        </div>
        </div>
       </div>
      </div>
     </div>
    </section><!-- About Section -->
-   <section id="about" class="py-20 px-6">
+   <section id="about" class="py-20 px-6 relative">
+    <div style="position: absolute; top: 5%; left: 5%; font-size: 3rem; opacity: 0.3; animation: float 5s ease-in-out infinite;">
+     🩺
+    </div>
+    <div style="position: absolute; top: 15%; right: 8%; font-size: 2.5rem; opacity: 0.3; animation: float 6s ease-in-out infinite 0.5s;">
+     💊
+    </div>
     <div class="max-w-5xl mx-auto">
-     <h2 id="about-title" class="font-serif text-4xl font-bold text-center mb-4">Professional Summary</h2>
+     <h2 id="about-title" class="font-serif text-4xl font-bold text-center mb-4" style="opacity: 0; animation: bounce-in 0.8s ease-out forwards;">Professional Summary</h2>
      <div class="section-divider"></div>
      <div class="rounded-2xl shadow-lg p-8 md:p-12 glass-card">
       <p class="text-lg leading-relaxed">Dedicated Homoeopathic Physician and Research Scholar with a strong foundation in holistic patient care, integrative health, and ethnomedicine research. Recognized with <strong>Best Outgoing Student Award</strong> by The Tamil Nadu Dr. M.G.R Medical University and <strong>Dr. Willmar Schwabe Merit Award</strong>. Experienced in clinical case management, patient counselling, mental health support, field-based ethnomedicinal research, mother tincture preparation, medicinal plant documentation, and scientific publications.</p>
@@ -154,8 +224,7 @@
      <div class="section-divider"></div>
      <div class="grid md:grid-cols-2 gap-6">
       <div class="rounded-xl shadow-md p-8 card-hover">
-       <div class="text-3xl mb-4">
-        🎓
+       <div class="text-3xl mb-4 relative"><span class="emoji-large">🎓</span> <span style="position: absolute; top: -10px; right: -10px; font-size: 1.5rem;">⭐</span>
        </div>
        <h3 class="font-serif text-2xl font-bold mb-3">BHMS</h3>
        <p class="font-semibold mb-2">Bachelor of Homoeopathic Medicine and Surgery</p>
@@ -171,8 +240,7 @@
        </div>
       </div>
       <div class="rounded-xl shadow-md p-8 card-hover">
-       <div class="text-3xl mb-4">
-        🧘‍♀️
+       <div class="text-3xl mb-4 relative"><span class="emoji-large">🧘‍♀️</span> <span style="position: absolute; top: -5px; right: -15px; font-size: 1.2rem;">🕉️</span>
        </div>
        <h3 class="font-serif text-2xl font-bold mb-3">Diploma in Yoga</h3>
        <p class="font-semibold mb-2">Yoga for Youth Empowerment</p>
@@ -205,14 +273,22 @@
      </div>
     </div>
    </section><!-- Research Section -->
-   <section id="research" class="py-20 px-6">
+   <section id="research" class="py-20 px-6 relative">
+    <div style="position: absolute; top: 10%; left: 3%; font-size: 2rem; opacity: 0.25; animation: float 7s ease-in-out infinite;">
+     🔬
+    </div>
+    <div style="position: absolute; bottom: 20%; right: 5%; font-size: 2.5rem; opacity: 0.25; animation: float 5s ease-in-out infinite 1s;">
+     📚
+    </div>
+    <div style="position: absolute; top: 30%; right: 10%; font-size: 2rem; opacity: 0.25; animation: float 6s ease-in-out infinite 0.5s;">
+     🌱
+    </div>
     <div class="max-w-6xl mx-auto">
      <h2 class="font-serif text-4xl font-bold text-center mb-4">Research &amp; Projects</h2>
      <div class="section-divider"></div>
      <div class="grid md:grid-cols-3 gap-6">
       <div class="rounded-xl shadow-md p-8 card-hover">
-       <div class="text-4xl mb-4">
-        🔬
+       <div class="text-4xl mb-4 relative"><span class="emoji-float">🔬</span> <span style="position: absolute; top: -8px; right: -8px; font-size: 1.2rem;">📊</span>
        </div>
        <h3 class="font-serif text-xl font-bold mb-3">Hemorrhoids and Homeopathy</h3>
        <p class="text-sm mb-3 font-medium">Retrospective Study</p>
@@ -220,8 +296,7 @@
        <p class="text-xs mt-4 font-semibold">2025</p>
       </div>
       <div class="rounded-xl shadow-md p-8 card-hover">
-       <div class="text-4xl mb-4">
-        🌿
+       <div class="text-4xl mb-4 relative"><span class="emoji-float" style="animation-delay: 0.5s;">🌿</span> <span style="position: absolute; top: -5px; right: -10px; font-size: 1.3rem;">🧪</span>
        </div>
        <h3 class="font-serif text-xl font-bold mb-3">Durio Zibethinus Mother Tincture</h3>
        <p class="text-sm mb-3 font-medium">Ethnomedicinal &amp; Phytochemical Study</p>
@@ -229,8 +304,7 @@
        <p class="text-xs mt-4 font-semibold">2025</p>
       </div>
       <div class="rounded-xl shadow-md p-8 card-hover">
-       <div class="text-4xl mb-4">
-        🏔️
+       <div class="text-4xl mb-4 relative"><span class="emoji-float" style="animation-delay: 1s;">🏔️</span> <span style="position: absolute; top: -8px; right: -12px; font-size: 1.4rem;">🌾</span>
        </div>
        <h3 class="font-serif text-xl font-bold mb-3">Ethnomedicinal Field Study</h3>
        <p class="text-sm mb-3 font-medium">Tribal Communities of the Nilgiris</p>
@@ -244,8 +318,15 @@
     <div class="max-w-5xl mx-auto">
      <h2 class="font-serif text-4xl font-bold text-center mb-4">Publications</h2>
      <div class="section-divider"></div>
-     <div class="rounded-xl shadow-lg p-8 glass-card">
-      <p class="text-center opacity-75 mb-4">📚 Peer-reviewed journal publications and conference papers</p>
+     <div class="rounded-xl shadow-lg p-8 glass-card relative">
+      <div style="position: absolute; top: 10px; left: 20px; font-size: 1.5rem; opacity: 0.4; animation: float 4s ease-in-out infinite;">
+       ✍️
+      </div>
+      <div style="position: absolute; top: 15px; right: 25px; font-size: 1.5rem; opacity: 0.4; animation: float 5s ease-in-out infinite 0.5s;">
+       📖
+      </div>
+      <p class="text-center opacity-75 mb-4"><span class="text-4xl emoji-float">📚</span></p>
+      <p class="text-center font-semibold mb-2">Peer-reviewed journal publications and conference papers</p>
       <p class="text-center text-sm opacity-60">Publications in medical writing, ethnomedicine research, and homoeopathic clinical studies</p>
      </div>
     </div>
@@ -257,22 +338,22 @@
      <div class="relative pl-12 space-y-8">
       <div class="timeline-item relative">
        <div class="timeline-dot"></div>
-       <div class="rounded-lg shadow-md p-6">
-        <h3 class="font-bold text-lg mb-2">🏆 Best Outgoing Student Award</h3>
+       <div class="rounded-lg shadow-md p-6 card-hover">
+        <h3 class="font-bold text-lg mb-2"><span class="emoji-large" style="font-size: 1.8rem;">🏆</span> Best Outgoing Student Award</h3>
         <p class="text-sm opacity-75">The Tamil Nadu Dr. M.G.R Medical University</p>
        </div>
       </div>
       <div class="timeline-item relative">
        <div class="timeline-dot"></div>
-       <div class="rounded-lg shadow-md p-6">
-        <h3 class="font-bold text-lg mb-2">🥇 University Topper</h3>
+       <div class="rounded-lg shadow-md p-6 card-hover">
+        <h3 class="font-bold text-lg mb-2"><span class="emoji-large" style="font-size: 1.8rem;">🥇</span> University Topper</h3>
         <p class="text-sm opacity-75">Sarada Krishna Homoeopathic Medical College</p>
        </div>
       </div>
       <div class="timeline-item relative">
        <div class="timeline-dot"></div>
-       <div class="rounded-lg shadow-md p-6">
-        <h3 class="font-bold text-lg mb-2">⭐ Dr. Willmar Schwabe Merit Award</h3>
+       <div class="rounded-lg shadow-md p-6 card-hover">
+        <h3 class="font-bold text-lg mb-2"><span class="emoji-large" style="font-size: 1.8rem;">⭐</span> Dr. Willmar Schwabe Merit Award</h3>
         <p class="text-sm opacity-75">For academic excellence in homoeopathic medicine</p>
        </div>
       </div>
@@ -284,9 +365,9 @@
      <h2 class="font-serif text-4xl font-bold text-center mb-4">Professional Skills</h2>
      <div class="section-divider"></div>
      <div class="grid md:grid-cols-3 gap-6">
-      <div class="rounded-xl shadow-md p-8 text-center">
+      <div class="rounded-xl shadow-md p-8 text-center card-hover">
        <div class="text-4xl mb-4">
-        💊
+        <span class="emoji-float">💊</span>
        </div>
        <h3 class="font-bold text-lg mb-4">Clinical Skills</h3>
        <ul class="text-sm space-y-2 opacity-90">
@@ -296,9 +377,9 @@
         <li>Preventive care</li>
        </ul>
       </div>
-      <div class="rounded-xl shadow-md p-8 text-center">
+      <div class="rounded-xl shadow-md p-8 text-center card-hover">
        <div class="text-4xl mb-4">
-        📊
+        <span class="emoji-float" style="animation-delay: 0.3s;">📊</span>
        </div>
        <h3 class="font-bold text-lg mb-4">Research Skills</h3>
        <ul class="text-sm space-y-2 opacity-90">
@@ -308,9 +389,9 @@
         <li>Tincture standardization</li>
        </ul>
       </div>
-      <div class="rounded-xl shadow-md p-8 text-center">
+      <div class="rounded-xl shadow-md p-8 text-center card-hover">
        <div class="text-4xl mb-4">
-        🌸
+        <span class="emoji-float" style="animation-delay: 0.6s;">🌸</span>
        </div>
        <h3 class="font-bold text-lg mb-4">Wellness Skills</h3>
        <ul class="text-sm space-y-2 opacity-90">
@@ -328,32 +409,32 @@
      <h2 class="font-serif text-4xl font-bold text-center mb-4">Certifications</h2>
      <div class="section-divider"></div>
      <div class="grid md:grid-cols-2 gap-4">
-      <div class="rounded-lg shadow-sm p-6 flex items-center gap-4">
-       <div class="text-2xl">
+      <div class="rounded-lg shadow-sm p-6 flex items-center gap-4 card-hover">
+       <div class="text-2xl emoji-large">
         📜
        </div>
        <div>
         <p class="font-semibold">NPTEL Health Research Fundamentals</p>
        </div>
       </div>
-      <div class="rounded-lg shadow-sm p-6 flex items-center gap-4">
-       <div class="text-2xl">
+      <div class="rounded-lg shadow-sm p-6 flex items-center gap-4 card-hover">
+       <div class="text-2xl emoji-large">
         ✍️
        </div>
        <div>
         <p class="font-semibold">IMWA Medical Writing Certification</p>
        </div>
       </div>
-      <div class="rounded-lg shadow-sm p-6 flex items-center gap-4">
-       <div class="text-2xl">
+      <div class="rounded-lg shadow-sm p-6 flex items-center gap-4 card-hover">
+       <div class="text-2xl emoji-large">
         🔍
        </div>
        <div>
         <p class="font-semibold">Pharmacovigilance Certification</p>
        </div>
       </div>
-      <div class="rounded-lg shadow-sm p-6 flex items-center gap-4">
-       <div class="text-2xl">
+      <div class="rounded-lg shadow-sm p-6 flex items-center gap-4 card-hover">
+       <div class="text-2xl emoji-large">
         👁️
        </div>
        <div>
@@ -368,17 +449,13 @@
      <h2 class="font-serif text-4xl font-bold text-center mb-4">Languages</h2>
      <div class="section-divider"></div>
      <div class="flex flex-wrap justify-center gap-6">
-      <div class="rounded-full px-8 py-4 shadow-md font-medium">
-       🇬🇧 English
+      <div class="rounded-full px-8 py-4 shadow-md font-medium card-hover" style="transition: all 0.3s ease;"><span class="emoji-large" style="font-size: 1.5rem;">🇬🇧</span> English
       </div>
-      <div class="rounded-full px-8 py-4 shadow-md font-medium">
-       🇮🇳 Tamil
+      <div class="rounded-full px-8 py-4 shadow-md font-medium card-hover" style="transition: all 0.3s ease;"><span class="emoji-large" style="font-size: 1.5rem;">🇮🇳</span> Tamil
       </div>
-      <div class="rounded-full px-8 py-4 shadow-md font-medium">
-       🇮🇳 Malayalam
+      <div class="rounded-full px-8 py-4 shadow-md font-medium card-hover" style="transition: all 0.3s ease;"><span class="emoji-large" style="font-size: 1.5rem;">🇮🇳</span> Malayalam
       </div>
-      <div class="rounded-full px-8 py-4 shadow-md font-medium">
-       🇮🇳 Telugu
+      <div class="rounded-full px-8 py-4 shadow-md font-medium card-hover" style="transition: all 0.3s ease;"><span class="emoji-large" style="font-size: 1.5rem;">🇮🇳</span> Telugu
       </div>
      </div>
     </div>
@@ -387,21 +464,27 @@
     <div class="max-w-5xl mx-auto">
      <h2 class="font-serif text-4xl font-bold text-center mb-4">Community Service</h2>
      <div class="section-divider"></div>
-     <div class="rounded-xl shadow-lg p-8 md:p-10 glass-card">
+     <div class="rounded-xl shadow-lg p-8 md:p-10 glass-card relative">
+      <div style="position: absolute; top: 15px; left: 30px; font-size: 1.5rem; opacity: 0.3; animation: float 4s ease-in-out infinite;">
+       💝
+      </div>
+      <div style="position: absolute; top: 20px; right: 35px; font-size: 1.3rem; opacity: 0.3; animation: float 5s ease-in-out infinite 0.8s;">
+       🤝
+      </div>
       <div class="text-center mb-8">
        <div class="text-5xl mb-4">
-        ❤️
+        <span class="emoji-float">❤️</span>
        </div>
        <p class="text-lg font-medium">Committed to serving communities through healthcare outreach</p>
       </div>
       <div class="grid md:grid-cols-2 gap-6">
-       <div class="flex items-start gap-3"><span class="text-2xl">🏥</span> <span>Community health camps</span>
+       <div class="flex items-start gap-3 p-4 rounded-lg card-hover"><span class="text-2xl emoji-large">🏥</span> <span>Community health camps</span>
        </div>
-       <div class="flex items-start gap-3"><span class="text-2xl">🌾</span> <span>Rural healthcare outreach</span>
+       <div class="flex items-start gap-3 p-4 rounded-lg card-hover"><span class="text-2xl emoji-large">🌾</span> <span>Rural healthcare outreach</span>
        </div>
-       <div class="flex items-start gap-3"><span class="text-2xl">👶</span> <span>Children's health programs</span>
+       <div class="flex items-start gap-3 p-4 rounded-lg card-hover"><span class="text-2xl emoji-large">👶</span> <span>Children's health programs</span>
        </div>
-       <div class="flex items-start gap-3"><span class="text-2xl">🧠</span> <span>Mental health awareness initiatives</span>
+       <div class="flex items-start gap-3 p-4 rounded-lg card-hover"><span class="text-2xl emoji-large">🧠</span> <span>Mental health awareness initiatives</span>
        </div>
       </div>
      </div>
@@ -411,23 +494,29 @@
     <div class="max-w-5xl mx-auto">
      <h2 class="font-serif text-4xl font-bold text-center mb-4">Get In Touch</h2>
      <div class="section-divider"></div>
-     <div class="rounded-2xl shadow-xl p-8 md:p-12 glass-card">
+     <div class="rounded-2xl shadow-xl p-8 md:p-12 glass-card relative">
+      <div style="position: absolute; top: 20px; left: 40px; font-size: 1.8rem; opacity: 0.3; animation: float 4.5s ease-in-out infinite;">
+       ✨
+      </div>
+      <div style="position: absolute; bottom: 25px; right: 45px; font-size: 1.6rem; opacity: 0.3; animation: float 5.5s ease-in-out infinite 0.7s;">
+       💫
+      </div>
       <div class="grid md:grid-cols-3 gap-8 text-center">
-       <div>
+       <div class="card-hover p-4 rounded-lg">
         <div class="text-4xl mb-4">
-         📧
+         <span class="emoji-float">📧</span>
         </div>
         <h3 class="font-bold mb-2">Email</h3><a id="contact-email" href="mailto:shaalini.yes@gmail.com" class="hover:underline">shaalini.yes@gmail.com</a>
        </div>
-       <div>
+       <div class="card-hover p-4 rounded-lg">
         <div class="text-4xl mb-4">
-         📱
+         <span class="emoji-float" style="animation-delay: 0.4s;">📱</span>
         </div>
         <h3 class="font-bold mb-2">Phone</h3><a id="contact-phone" href="tel:+916369298335" class="hover:underline">+91 63692 98335</a>
        </div>
-       <div>
+       <div class="card-hover p-4 rounded-lg">
         <div class="text-4xl mb-4">
-         💼
+         <span class="emoji-float" style="animation-delay: 0.8s;">💼</span>
         </div>
         <h3 class="font-bold mb-2">LinkedIn</h3><a href="https://linkedin.com/in/drshaalinis" target="_blank" rel="noopener noreferrer" class="hover:underline">linkedin.com/in/drshaalinis</a>
        </div>
@@ -654,5 +743,5 @@
       });
     });
   </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b2632c041eb3989',t:'MTc2NjQ3NTQ5NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9b266d9926e184d1',t:'MTc2NjQ3NzkwNS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
